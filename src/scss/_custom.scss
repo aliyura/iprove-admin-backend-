@@ -1,0 +1,179 @@
+// Here you can add other styles
+tr {
+  padding: 10px;
+}
+td {
+  padding: 15px;
+}
+.container-lg,
+.container-md,
+.container-sm,
+.container {
+  max-width: 100%;
+}
+.sidebar {
+  background: #222222;
+  background-color: #222222;
+  background-image: linear-gradient(180deg, #161616, #222222);
+  border-color: #222222;
+  width: 300px;
+}
+.header.header-sticky {
+  background: #fcd535;
+  background-color: #fcd535;
+  background-image: linear-gradient(180deg, #ffd428, #fcd535);
+  border-color: #fcd535;
+  background: #fcd535;
+  box-shadow: 0 2px 5px #0000004d;
+}
+
+.header-divider {
+  border-top: 1px solid #ebedef;
+}
+.bg-info {
+  background: #fcd535 !important;
+  background-color: #fcd535 !important;
+  background-image: linear-gradient(180deg, #ffd428, #fcd535) !important;
+  border-color: #fcd535;
+  background: #fcd535;
+}
+.sidebar-logo {
+  width: 130px;
+}
+
+.footer {
+  background-color: #fff;
+  box-shadow: 0 2px 5px #0000004d;
+}
+.success,
+.completed,
+.valid {
+  background-color: #04aa6d !important;
+  color: white;
+}
+.failed,
+.invalid,
+.canceled {
+  background-color: #ed5b5b !important;
+  color: white;
+}
+.pending,
+.active {
+  background-color: #fcd535 !important;
+  color: white;
+}
+.page-options {
+  width: 100px;
+}
+.pagenation-nav {
+  float: right;
+}
+.btn-primary {
+  background: #222222;
+  background-color: #222222;
+  background-image: linear-gradient(180deg, #222222, #333333);
+  border-color: #222222;
+  background: #222222;
+  margin: 5px;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background: #fff;
+  color: #222222;
+}
+
+.native {
+  background: #fcd535;
+  background-color: #fcd535;
+  background-image: linear-gradient(180deg, #ffd428, #fcd535);
+  border-color: #fcd535;
+  background: #fcd535;
+  color: #333;
+}
+.outline {
+  background: #fff;
+  color: #222222;
+}
+.sidebar-nav::-webkit-scrollbar {
+  width: 1px;
+}
+
+.sidebar-nav::-webkit-scrollbar-track {
+  border-radius: px;
+  background: #c9cacc;
+}
+
+.sidebar-nav::-webkit-scrollbar-track:hover {
+  background: #78797a;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb {
+  background: #ffd428;
+  border-radius: 10px;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb:hover {
+  background: #ffd428;
+}
+.text-align-right {
+  text-align: right;
+}
+.widget {
+  min-height: 100px;
+  text-align: center;
+}
+.widget-card {
+  border: 2px solid #333;
+  border-top: none;
+  border-bottom: none;
+  padding: 20px;
+}
+.widget-card:first-child {
+  border-left: none;
+}
+.widget-card:last-child {
+  border-right: none;
+}
+
+.widget-card .todo-icon {
+  width: 60px;
+  height: 60px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+.widget-card h4,
+.widget-card .h4 {
+  font-size: 16px;
+}
+.balance-badge {
+  font-size: 30px;
+  color: 222;
+  padding-right: 20px;
+  text-shadow: 1px 1px 0px #222;
+}
+input,
+select {
+  height: 45px;
+}
+.notification-counter {
+  position: absolute;
+  z-index: 1;
+  left: -39px;
+  top: -2px;
+  background: #e55353 !important;
+}
+.btn:disabled,
+.btn.disabled,
+fieldset:disabled .btn {
+  color: rgb(29 29 29);
+  pointer-events: none;
+  background-color: #a3a3a3;
+  border-color: transparent;
+  border-color: #b1b7c1;
+  opacity: 0.65;
+}
+.selected{
+  background: #fff !important;
+  color: #222222 !important;
+}
