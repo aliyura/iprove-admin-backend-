@@ -17,7 +17,7 @@ const DefaultLayout = () => {
       </div>
     )
   } else {
-    window.location.href = '#/login'
+    window.location.href = 'https://iprove.ng/auth/login'
     return <></>
   }
 }
