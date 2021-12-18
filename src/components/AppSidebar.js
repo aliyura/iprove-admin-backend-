@@ -7,7 +7,9 @@ import 'simplebar/dist/simplebar.min.css'
 import Logo from 'src/assets/images/logo.png'
 
 // sidebar nav config
-import navigation from '../_nav'
+import adminNavigation from '../_admin_corporate_nav'
+import userNavigation from '../_individual_user_nav'
+import { getUserAccountType } from 'src/auth'
 
 const AppSidebar = () => {
   const dispatch = useDispatch()
@@ -28,7 +30,11 @@ const AppSidebar = () => {
       </CSidebarBrand>
       <CSidebarNav>
         <SimpleBar>
-          <AppSidebarNav items={navigation} />
+          {getUserAccountType() === 'INDIVIDUAL' ? (
+            <AppSidebarNav items={userNavigation} />
+          ) : (
+            <AppSidebarNav items={adminNavigation} />
+          )}
         </SimpleBar>
       </CSidebarNav>
       <CSidebarToggler

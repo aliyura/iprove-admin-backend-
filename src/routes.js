@@ -19,9 +19,6 @@ const PropertyVerifications = React.lazy(() =>
 const AllOrganizations = React.lazy(() => import('./views/organization/AllOrganizations'))
 const ActiveOrganizations = React.lazy(() => import('./views/organization/ActiveOrganizations'))
 const InActiveOrganizations = React.lazy(() => import('./views/organization/InActiveOrganizations'))
-const OrganizationDetails = React.lazy(() =>
-  import('./views/base/organization-details/OrganizationDetails'),
-)
 const OrganizationProfile = React.lazy(() =>
   import('./views/base/organization-details/OrganizationProfile'),
 )
@@ -42,7 +39,7 @@ const EmploymentVerification = React.lazy(() =>
 )
 const PropertyVerification = React.lazy(() => import('./views/verification/PropertyVerification'))
 
-const PaymentRedirection = React.lazy(() => import('./views/base/PaymentRedirection'))
+const Status = React.lazy(() => import('./views/base/Status'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -70,9 +67,7 @@ const routes = [
     component: EmploymentVerifications,
   },
   { path: '/organization/create', name: 'CreateOrganization', component: CreateOrganization },
-  { path: '/organization/topup', name: 'TopUpOrganization', component: TopUpOrganization },
-
-  { path: '/organization/details', name: 'OrganizationDetails', component: OrganizationDetails },
+  { path: '/fund/wallet', name: 'FundWalletOrganization', component: TopUpOrganization },
   { path: '/organization/all', name: 'AllOrganizations', component: AllOrganizations },
   { path: '/organizations/active', name: 'ActiveOrganizations', component: ActiveOrganizations },
 
@@ -94,9 +89,9 @@ const routes = [
 
   //checkout
   {
-    path: '/payment/redirect',
-    name: 'PaymentRedirection',
-    component: PaymentRedirection,
+    path: '/status',
+    name: 'Status',
+    component: Status,
   },
 
   {

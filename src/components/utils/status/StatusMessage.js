@@ -1,7 +1,6 @@
 import React from 'react'
 import CIcon from '@coreui/icons-react'
 import { cilInfo } from '@coreui/icons'
-import './StatusMessage.css'
 
 const StatusMessage = (props) => {
   return (

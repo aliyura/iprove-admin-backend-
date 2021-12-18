@@ -23,17 +23,17 @@ const Login = () => {
   function handleClick() {
     var sessionData = {
       access_token:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZGRyZXNzIjoiTm8gMTJDIEFkZXdhbGUgU3RyZWV0LCBBamFoLCBMYWdvcywgTmlnZXJpYSIsInNlY3JldGtleSI6bnVsbCwibGV2ZWwiOm51bGwsInVzZXJfbmFtZSI6ImFkbWluQGlwcm92ZS5uZyIsImFjY291bnR0eXBlIjoiQURNSU4iLCJtb2JpbGUiOiIwODAwMDAwMDAwMCIsInV1aWQiOiIzYjJiZWYwZDViZDExMWVjYTkyZmJkNjBjMjc5NWI0OSIsImF1dGhvcml0aWVzIjpbIlVTRVIiXSwiY2xpZW50X2lkIjoiaXByb3ZlLWNsaWVudCIsIm9yZ2FuaXphdGlvbmlkIjpudWxsLCJwbGFpbiI6bnVsbCwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5hbWUiOiJpUHJvdmUgTmlnZXJpYSIsImlkIjoxLCJqdGkiOiIzZjNiODE2MS02MDE1LTQxNGYtYmY4ZS1jYzYyMDY4NmFlMTEiLCJlbWFpbCI6ImFkbWluQGlwcm92ZS5uZyIsInN1YnVuaXF1ZWlkIjpudWxsLCJzdGF0dXMiOiJBQyIsImlzZW5hYmxlZCI6dHJ1ZX0.XOssrgjRK0bMZWh7sTlr8AZ7oYG1CzPDurUJrCW4rUw',
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZGRyZXNzIjoiTm8gMTBDIEFkZXdhbGUgU3RyZWV0LCBBamFoLCBMYWdvcywgTmlnZXJpYSIsInNlY3JldGtleSI6Ijg0OTk5YzRmMTFjYjdlOWQyYzQwNmUzYjUxZjc5MDhlIiwibGV2ZWwiOm51bGwsInVzZXJfbmFtZSI6ImFkbWluQGlwcm92ZS5uZyIsImFjY291bnR0eXBlIjoiQURNSU4iLCJtb2JpbGUiOiIwODAwMDAwMDAwMCIsInV1aWQiOiJlNzkxYTQ1YTVlZjYxMWVjOWE5MDMzOThmMGNmYjNjMyIsImF1dGhvcml0aWVzIjpbIlVTRVIiXSwiY2xpZW50X2lkIjoiaXByb3ZlLWNsaWVudCIsIm9yZ2FuaXphdGlvbmlkIjoibGlicmFsbGF3IiwicGxhaW4iOm51bGwsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJuYW1lIjoiaVByb3ZlIE5pZ2VyaWEiLCJpZCI6MSwianRpIjoiNzlkZTRhZDItOTMyMi00YWM1LTgyOTAtOTM2N2NlNDM3MjI5IiwiZW1haWwiOiJhZG1pbkBpcHJvdmUubmciLCJzdWJ1bmlxdWVpZCI6bnVsbCwic3RhdHVzIjoiQUMiLCJpc2VuYWJsZWQiOnRydWV9.xXeL4Z5nxSm4geABPIuuj0Q-WxSo7XAixAvqaRKI4YE',
       token_type: 'bearer',
       refresh_token:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZGRyZXNzIjoiTm8gMTJDIEFkZXdhbGUgU3RyZWV0LCBBamFoLCBMYWdvcywgTmlnZXJpYSIsInNlY3JldGtleSI6bnVsbCwibGV2ZWwiOm51bGwsInVzZXJfbmFtZSI6ImFkbWluQGlwcm92ZS5uZyIsImFjY291bnR0eXBlIjoiQURNSU4iLCJtb2JpbGUiOiIwODAwMDAwMDAwMCIsInV1aWQiOiIzYjJiZWYwZDViZDExMWVjYTkyZmJkNjBjMjc5NWI0OSIsImF1dGhvcml0aWVzIjpbIlVTRVIiXSwiY2xpZW50X2lkIjoiaXByb3ZlLWNsaWVudCIsIm9yZ2FuaXphdGlvbmlkIjpudWxsLCJwbGFpbiI6bnVsbCwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sImF0aSI6IjNmM2I4MTYxLTYwMTUtNDE0Zi1iZjhlLWNjNjIwNjg2YWUxMSIsIm5hbWUiOiJpUHJvdmUgTmlnZXJpYSIsImlkIjoxLCJleHAiOjE2NDIwNTI2MzcsImp0aSI6IjEzNzNiMTFmLWVhMTctNGUwYi1iYmRiLTg5Nzc3NjNhMWI4MSIsImVtYWlsIjoiYWRtaW5AaXByb3ZlLm5nIiwic3VidW5pcXVlaWQiOm51bGwsInN0YXR1cyI6IkFDIiwiaXNlbmFibGVkIjp0cnVlfQ.yxuyhuAK-Kpbnb__dMiK5u9ZTy17fOHtE2lDtEowUmM',
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZGRyZXNzIjoiTm8gMTBDIEFkZXdhbGUgU3RyZWV0LCBBamFoLCBMYWdvcywgTmlnZXJpYSIsInNlY3JldGtleSI6Ijg0OTk5YzRmMTFjYjdlOWQyYzQwNmUzYjUxZjc5MDhlIiwibGV2ZWwiOm51bGwsInVzZXJfbmFtZSI6ImFkbWluQGlwcm92ZS5uZyIsImFjY291bnR0eXBlIjoiQURNSU4iLCJtb2JpbGUiOiIwODAwMDAwMDAwMCIsInV1aWQiOiJlNzkxYTQ1YTVlZjYxMWVjOWE5MDMzOThmMGNmYjNjMyIsImF1dGhvcml0aWVzIjpbIlVTRVIiXSwiY2xpZW50X2lkIjoiaXByb3ZlLWNsaWVudCIsIm9yZ2FuaXphdGlvbmlkIjoibGlicmFsbGF3IiwicGxhaW4iOm51bGwsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJhdGkiOiI3OWRlNGFkMi05MzIyLTRhYzUtODI5MC05MzY3Y2U0MzcyMjkiLCJuYW1lIjoiaVByb3ZlIE5pZ2VyaWEiLCJpZCI6MSwiZXhwIjoxNjQyMzk4NTQ3LCJqdGkiOiI0NDlmOWIxNS1iMzgyLTRiMTctOTI4My02NmE4NzMxMzczZGEiLCJlbWFpbCI6ImFkbWluQGlwcm92ZS5uZyIsInN1YnVuaXF1ZWlkIjpudWxsLCJzdGF0dXMiOiJBQyIsImlzZW5hYmxlZCI6dHJ1ZX0.nDeLDCn_k4HyATfTV-n-pR1COTDeZOwKeNjrCkTfdzM',
       scope: 'read write',
-      address: 'No 12C Adewale Street, Ajah, Lagos, Nigeria',
+      address: 'No 10C Adewale Street, Ajah, Lagos, Nigeria',
       secretkey: '84999c4f11cb7e9d2c406e3b51f7908e',
       level: null,
       accounttype: 'ADMIN',
       mobile: '08000000000',
-      uuid: '3b2bef0d5bd111eca92fbd60c2795b49',
+      uuid: 'e791a45a5ef611ec9a903398f0cfb3c3',
       organizationid: 'librallaw',
       plain: null,
       name: 'iProve Nigeria',
@@ -42,7 +42,7 @@ const Login = () => {
       subuniqueid: null,
       status: 'AC',
       isenabled: true,
-      jti: '960dde02-dd39-4eb4-b8f9-8d5e7ae7b18f',
+      jti: '79de4ad2-9322-4ac5-8290-9367ce437229',
     }
 
     localStorage.setItem('SESSION', JSON.stringify(sessionData))
@@ -91,7 +91,10 @@ const Login = () => {
                   </CForm>
                 </CCardBody>
               </CCard>
-              <CCard className="text-white bg-primary py-5" style={{ width: '44%' }}>
+              <CCard
+                className="text-white bg-primary py-5 login-container native"
+                style={{ width: '44%' }}
+              >
                 <CCardBody className="text-center">
                   <div>
                     <h2>Sign up</h2>

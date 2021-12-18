@@ -9,6 +9,12 @@ import IdentityService from 'src/services/identity-service'
 import { useAlert } from 'react-alert'
 
 const GuarantorVerification = () => {
+  const SELECTED_VERIFICATIONS = 'SELECTED_VERIFICATIONS'
+  const storedVerifications = localStorage.getItem(SELECTED_VERIFICATIONS)
+  //prepare selected services
+  const selectedVerifications =
+    storedVerifications !== null ? JSON.parse(storedVerifications) : null
+
   const [currentUser, setCurrentUser] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const { register, handleSubmit } = useForm()
@@ -20,31 +26,49 @@ const GuarantorVerification = () => {
   }
 
   const onSubmit = (request) => {
-    setIsLoading(true)
-    IdentityService.verifyGuarantor(request).then((response) => {
-      setIsLoading(false)
-      if (response == null) {
-        alert.show('Request Failed', {
+    if (selectedVerifications !== null) {
+      if (selectedVerifications['guarantor'].status === 'open') {
+        setIsLoading(true)
+        IdentityService.verifyGuarantor(request).then((response) => {
+          setIsLoading(false)
+          if (response == null) {
+            alert.show('Request Failed', {
+              timeout: 20000,
+              type: 'error',
+            })
+          } else {
+            if (response.success) {
+              //close this verification
+              selectedVerifications['guarantor'].status = 'closed'
+              localStorage.setItem(SELECTED_VERIFICATIONS, JSON.stringify(selectedVerifications))
+
+              alert.show(response.message, {
+                timeout: 20000,
+                type: 'success',
+              })
+              if (response.success) {
+                window.location.href = '#/guarantor/verifications'
+              }
+            } else {
+              alert.show(response.message, {
+                timeout: 20000,
+                type: 'error',
+              })
+            }
+          }
+        })
+      } else {
+        alert.show('Oops! Guarantor Verification no longer active in your subscriptions', {
           timeout: 20000,
           type: 'error',
         })
-      } else {
-        if (response.success) {
-          alert.show(response.message, {
-            timeout: 20000,
-            type: 'success',
-          })
-          if (response.success) {
-            window.location.href = '#/guarantor/verifications'
-          }
-        } else {
-          alert.show(response.message, {
-            timeout: 20000,
-            type: 'error',
-          })
-        }
       }
-    })
+    } else {
+      alert.show('Oops! You have not subscribe to this service ', {
+        timeout: 20000,
+        type: 'error',
+      })
+    }
   }
 
   useEffect(() => {

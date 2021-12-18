@@ -70,7 +70,7 @@ const _nav = [
   {
     component: CNavItem,
     name: 'Top Up Organization',
-    to: '/organization/topup',
+    to: '/fund/wallet',
     icon: <CIcon icon={cilMoney} customClassName="nav-icon" />,
   },
   {

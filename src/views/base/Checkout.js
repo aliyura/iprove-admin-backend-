@@ -12,10 +12,26 @@ import { useAlert } from 'react-alert'
 import { Link } from 'react-router-dom'
 
 const Checkout = () => {
-  const storedService = localStorage.getItem('SELECTED_SERVICE')
+  const SELECTED_SERVICES = 'SELECTED_SERVICES'
+  const SELECTED_VERIFICATIONS = 'SELECTED_VERIFICATIONS'
+  const PAYMENT_STATUS = 'PAYMENT_STATUS'
+  //get stored services
+  const storedPaymentStatus = localStorage.getItem(PAYMENT_STATUS)
+  const storedServices = localStorage.getItem(SELECTED_SERVICES)
+  const storedVerifications = localStorage.getItem(SELECTED_VERIFICATIONS)
+  //prepare selected services
+  const selectedServices = storedServices !== null ? JSON.parse(storedServices) : null
+  const selectedVerifications =
+    storedVerifications !== null ? JSON.parse(storedVerifications) : null
+
+  //set payment status
+  const [paymentStatus, setPaymentStatus] = useState(
+    storedPaymentStatus !== null ? storedPaymentStatus : 'unpaid',
+  )
+  const [myVerifications, setMyVerifications] = useState(selectedVerifications)
+
   const [currentUser, setCurrentUser] = useState(null)
   const [services, setService] = useState(null)
-  const [paymentStatus, setPaymentStatus] = useState('unPaid')
   const [serviceKeys, setServiceKeys] = useState([])
   const alert = useAlert()
 
@@ -23,8 +39,7 @@ const Checkout = () => {
   var orderTitle = ''
   var handleFlutterPayment
 
-  if (storedService != null) {
-    var selectedServices = JSON.parse(storedService)
+  if (selectedServices != null) {
     var keys = Object.keys(selectedServices)
     var currentServices = []
     keys.forEach((item) => {
@@ -33,13 +48,11 @@ const Checkout = () => {
         currentServices.push(service)
       }
     })
-    console.log(keys)
     currentServices.forEach((service) => {
       totalAmount += service.price
       orderTitle += service.title + ','
     })
 
-    console.log(currentServices)
     var paymentConfig = {
       public_key: publicKey,
       tx_ref: Date.now(),
@@ -58,23 +71,31 @@ const Checkout = () => {
       },
     }
   }
-
-  console.log(totalAmount)
-  console.log(paymentConfig)
   handleFlutterPayment = useFlutterwave(paymentConfig)
 
+  const markOrderAsPaid = () => {
+    var paidVerifications = { ...myVerifications }
+
+    serviceKeys.forEach((key) => {
+      paidVerifications[key].status = 'open'
+    })
+
+    localStorage.setItem(PAYMENT_STATUS, 'paid')
+    localStorage.setItem(SELECTED_VERIFICATIONS, JSON.stringify(myVerifications))
+
+    setPaymentStatus('paid')
+    setMyVerifications(paidVerifications)
+  }
+
   const pay = () => {
-    if (storedService != null) {
+    if (selectedServices != null) {
       handleFlutterPayment({
         callback: (response) => {
           console.log(response)
-
+          markOrderAsPaid()
           closePaymentModal()
         },
-        onClose: () => {
-          localStorage.setItem('PAYMENT_STATUS', 'paid')
-          setPaymentStatus('paid')
-        },
+        onClose: () => {},
       })
     } else {
       alert.show('No Service Selected', {
@@ -85,15 +106,11 @@ const Checkout = () => {
   }
 
   useEffect(() => {
-    var paymentStatus = localStorage.getItem('PAYMENT_STATUS')
-    if (paymentStatus != null) {
-      setPaymentStatus('paid', paymentStatus)
-    }
-
     setCurrentUser(getUserDetails())
-    if (storedService != null) {
-      setService(JSON.parse(storedService))
-      setServiceKeys(Object.keys(JSON.parse(storedService)))
+    if (selectedServices != null) {
+      setService(selectedServices)
+      setServiceKeys(Object.keys(selectedServices))
+      setMyVerifications(selectedVerifications)
     }
   }, [])
 
@@ -117,13 +134,15 @@ const Checkout = () => {
                                   <p className="mb-0">Title</p>
                                 </div>
                                 <div className="col">
-                                  <h5 className="text-muted mb-0">{verification[item].title}</h5>
+                                  <h5 className="text-muted mb-0">{myVerifications[item].title}</h5>
                                 </div>
                                 <div className="col">
                                   <p className="mb-0">Price</p>
                                 </div>
                                 <div className="col">
-                                  <h5 className="text-muted mb-0">₦{verification[item].price}</h5>
+                                  <h5 className="text-muted mb-0">
+                                    ₦{myVerifications[item].price}
+                                  </h5>
                                 </div>
                                 <div className="col">
                                   <p className="mb-0">Payment Status</p>
@@ -135,22 +154,35 @@ const Checkout = () => {
                                   <p className="mb-0">#</p>
                                 </div>
                                 <div className="col">
-                                  {paymentStatus === 'paid' ? (
+                                  {myVerifications[item].status === 'open' &&
+                                  paymentStatus === 'paid' ? (
                                     <Link
-                                      to={verification[item].page}
+                                      to={myVerifications[item].page}
                                       type="button"
                                       className="btn btn-primary"
                                     >
                                       Verify
                                     </Link>
                                   ) : (
-                                    <button
-                                      type="button"
-                                      disabled
-                                      className="btn btn-primary disabled"
-                                    >
-                                      Pending Payment
-                                    </button>
+                                    <>
+                                      {paymentStatus === 'paid' ? (
+                                        <button
+                                          type="button"
+                                          disabled
+                                          className="btn btn-primary disabled"
+                                        >
+                                          Verified
+                                        </button>
+                                      ) : (
+                                        <button
+                                          type="button"
+                                          disabled
+                                          className="btn btn-primary disabled"
+                                        >
+                                          Pending
+                                        </button>
+                                      )}
+                                    </>
                                   )}
                                 </div>
                               </div>

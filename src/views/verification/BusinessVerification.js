@@ -9,6 +9,12 @@ import IdentityService from 'src/services/identity-service'
 import { useAlert } from 'react-alert'
 
 const BusinessVerification = () => {
+  const SELECTED_VERIFICATIONS = 'SELECTED_VERIFICATIONS'
+  const storedVerifications = localStorage.getItem(SELECTED_VERIFICATIONS)
+  //prepare selected services
+  const selectedVerifications =
+    storedVerifications !== null ? JSON.parse(storedVerifications) : null
+
   const [currentUser, setCurrentUser] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const { register, handleSubmit } = useForm()
@@ -20,31 +26,49 @@ const BusinessVerification = () => {
   }
 
   const onSubmit = (request) => {
-    setIsLoading(true)
-    IdentityService.verifyBusiness(request).then((response) => {
-      setIsLoading(false)
-      if (response == null) {
-        alert.show('Request Failed', {
+    if (selectedVerifications !== null) {
+      if (selectedVerifications['business'].status === 'open') {
+        setIsLoading(true)
+        IdentityService.verifyBusiness(request).then((response) => {
+          setIsLoading(false)
+          if (response == null) {
+            alert.show('Request Failed', {
+              timeout: 20000,
+              type: 'error',
+            })
+          } else {
+            if (response.success) {
+              //close this verification
+              selectedVerifications['business'].status = 'closed'
+              localStorage.setItem(SELECTED_VERIFICATIONS, JSON.stringify(selectedVerifications))
+
+              alert.show(response.message, {
+                timeout: 20000,
+                type: 'success',
+              })
+              if (response.success) {
+                window.location.href = '#/business/verifications'
+              }
+            } else {
+              alert.show(response.message, {
+                timeout: 20000,
+                type: 'error',
+              })
+            }
+          }
+        })
+      } else {
+        alert.show('Oops! Business Verification no longer active in your subscriptions', {
           timeout: 20000,
           type: 'error',
         })
-      } else {
-        if (response.success) {
-          alert.show(response.message, {
-            timeout: 20000,
-            type: 'success',
-          })
-          if (response.success) {
-            window.location.href = '#/business/verifications'
-          }
-        } else {
-          alert.show(response.message, {
-            timeout: 20000,
-            type: 'error',
-          })
-        }
       }
-    })
+    } else {
+      alert.show('Oops! You have not subscribe to this service ', {
+        timeout: 20000,
+        type: 'error',
+      })
+    }
   }
 
   useEffect(() => {

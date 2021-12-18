@@ -22,5 +22,11 @@ export const getParams = function (param) {
       absParams[val[0]] = val[1]
     }
   })
-  return absParams[param]
+  var str = absParams[param]
+  if (str !== null) {
+    str = str.replaceAll('%20', ' ')
+    return str
+  } else {
+    return null
+  }
 }
