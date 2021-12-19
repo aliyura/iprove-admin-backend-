@@ -173,11 +173,11 @@ fieldset:disabled .btn {
   border-color: #b1b7c1;
   opacity: 0.65;
 }
-.selected{
+.selected {
   background: #fff !important;
   color: #222222 !important;
 }
-.login-container{
+.login-container {
   background: #ffd428 !important;
 }
 
@@ -199,4 +199,16 @@ fieldset:disabled .btn {
   width: 100px;
   margin-bottom: 5px;
   color: rgb(160, 51, 51);
+}
+.subscription-trigger-wrapper {
+  width: 100%;
+  text-align: right;
+}
+.subscription-right-link {
+  border: none;
+  background: none;
+  color: #e55353;
+  border-radius: 0;
+  padding: 10px;
+  border-bottom: 1px solid #ebedef;
 }

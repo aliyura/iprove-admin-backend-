@@ -111,30 +111,34 @@ const OrganizationProfile = () => {
         <section>
           <div className="container py-2">
             <div className="row">
-              <div className="col-lg-4">
-                <div className="card mb-4">
-                  <div className="card-body">
-                    <div className="p-3 mb-3 row">
-                      <h5>{currentUser.name}</h5>
-                      <p>Abuja, Nigeria</p>
-                    </div>
-                    <hr />
-                    <h4>Wallet Balance</h4>
-                    <h2 className="text-muted mb-1">{isLoading ? '...' : walletBalance}</h2>
-                    <hr />
-                    <br />
-                    <Link to="/account/change-password" className="btn btn-primary ms-1">
-                      {' '}
-                      <CIcon icon={cilPencil} /> Reset Password
-                    </Link>
+              {currentUser.accounttype !== 'INDIVIDUAL' ? (
+                <div className="col-lg-4">
+                  <div className="card mb-4">
+                    <div className="card-body">
+                      <div className="p-3 mb-3 row">
+                        <h5>{currentUser.name}</h5>
+                        <p>Abuja, Nigeria</p>
+                      </div>
+                      <hr />
+                      <h4>Wallet Balance</h4>
+                      <h2 className="text-muted mb-1">{isLoading ? '...' : walletBalance}</h2>
+                      <hr />
+                      <br />
+                      <Link to="/account/change-password" className="btn btn-primary ms-1">
+                        {' '}
+                        <CIcon icon={cilPencil} /> Reset Password
+                      </Link>
 
-                    <Link to="/fund/wallet" className="btn btn-primary native ms-1">
-                      {' '}
-                      <CIcon icon={cilWallet} /> Fund Wallet
-                    </Link>
+                      <Link to="/fund/wallet" className="btn btn-primary native ms-1">
+                        {' '}
+                        <CIcon icon={cilWallet} /> Fund Wallet
+                      </Link>
+                    </div>
                   </div>
                 </div>
-              </div>
+              ) : (
+                <></>
+              )}
               <div className="col-lg-8">
                 <div className="card mb-4">
                   <div className="card-body">
@@ -175,24 +179,30 @@ const OrganizationProfile = () => {
                       </div>
                     </div>
 
-                    <hr />
-                    <div className="row">
-                      <div className="col-sm-3">
-                        <p className="mb-0">Organization Id</p>
-                      </div>
-                      <div className="col-sm-9">
-                        <p className="text-muted mb-0">{currentUser.organizationid}</p>
-                      </div>
-                    </div>
-                    <hr />
-                    <div className="row">
-                      <div className="col-sm-3">
-                        <p className="mb-0">Secret Key</p>
-                      </div>
-                      <div className="col-sm-9">
-                        <p className="text-muted mb-0">{currentUser.secretkey}</p>
-                      </div>
-                    </div>
+                    {currentUser.accounttype !== 'INDIVIDUAL' ? (
+                      <>
+                        <hr />
+                        <div className="row">
+                          <div className="col-sm-3">
+                            <p className="mb-0">Organization Id</p>
+                          </div>
+                          <div className="col-sm-9">
+                            <p className="text-muted mb-0">{currentUser.organizationid}</p>
+                          </div>
+                        </div>
+                        <hr />
+                        <div className="row">
+                          <div className="col-sm-3">
+                            <p className="mb-0">Secret Key</p>
+                          </div>
+                          <div className="col-sm-9">
+                            <p className="text-muted mb-0">{currentUser.secretkey}</p>
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <></>
+                    )}
                   </div>
                 </div>
                 <div className="row">
@@ -200,7 +210,7 @@ const OrganizationProfile = () => {
                     <div className="card mb-4 mb-md-0">
                       <div className="card mb-4 mb-lg-0">
                         <div className="card-body p-4">
-                          <h4 className="pb-2">Edit Organisation Profile</h4>
+                          <h4 className="pb-2">Edit Profile</h4>
                           <form method="POST" name="form" onSubmit={handleSubmit(onUpdateProfile)}>
                             <div className="form-group mb-3">
                               <input
@@ -264,58 +274,62 @@ const OrganizationProfile = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="col-md-6">
-                    <div className="card mb-4 mb-md-0 p-4">
-                      <h4 className="pb-2">Reset Secret Key</h4>
-                      <form method="POST" name="form" onSubmit={handleSubmit(onResetKeys)}>
-                        <div className="form-group mb-3">
-                          <input
-                            type="text"
-                            placeholder=" Organization id"
-                            className="form-control disabled"
-                            readOnly
-                            defaultValue={currentUser.organizationid}
-                            required={true}
-                            name="organizationid"
-                            {...register('organizationid')}
-                          />
-                        </div>
-                        <div className="form-group mb-3">
-                          <input
-                            type="text"
-                            placeholder=" Secret Key"
-                            className="form-control disabled"
-                            readOnly
-                            defaultValue={currentUser.secretkey}
-                            required={true}
-                            name="secretkey"
-                            {...register('secretkey')}
-                          />
-                        </div>
-                        <div className="form-group mb-3">
-                          <input
-                            type="password"
-                            placeholder=" Password"
-                            className="form-control"
-                            required={true}
-                            name="password"
-                            {...register('password')}
-                          />
-                        </div>
-                        <div className="form-group mb-3">
-                          {isResetingKeys ? (
-                            <button type="button" className="btn btn-primary  ms-1">
-                              Please Wait...
-                            </button>
-                          ) : (
-                            <button type="submit" className="btn btn-primary  ms-1">
-                              Reset Keys
-                            </button>
-                          )}
-                        </div>
-                      </form>
+                  {currentUser.accounttype !== 'INDIVIDUAL' ? (
+                    <div className="col-md-6">
+                      <div className="card mb-4 mb-md-0 p-4">
+                        <h4 className="pb-2">Reset Secret Key</h4>
+                        <form method="POST" name="form" onSubmit={handleSubmit(onResetKeys)}>
+                          <div className="form-group mb-3">
+                            <input
+                              type="text"
+                              placeholder=" Organization id"
+                              className="form-control disabled"
+                              readOnly
+                              defaultValue={currentUser.organizationid}
+                              required={true}
+                              name="organizationid"
+                              {...register('organizationid')}
+                            />
+                          </div>
+                          <div className="form-group mb-3">
+                            <input
+                              type="text"
+                              placeholder=" Secret Key"
+                              className="form-control disabled"
+                              readOnly
+                              defaultValue={currentUser.secretkey}
+                              required={true}
+                              name="secretkey"
+                              {...register('secretkey')}
+                            />
+                          </div>
+                          <div className="form-group mb-3">
+                            <input
+                              type="password"
+                              placeholder=" Password"
+                              className="form-control"
+                              required={true}
+                              name="password"
+                              {...register('password')}
+                            />
+                          </div>
+                          <div className="form-group mb-3">
+                            {isResetingKeys ? (
+                              <button type="button" className="btn btn-primary  ms-1">
+                                Please Wait...
+                              </button>
+                            ) : (
+                              <button type="submit" className="btn btn-primary  ms-1">
+                                Reset Keys
+                              </button>
+                            )}
+                          </div>
+                        </form>
+                      </div>
                     </div>
-                  </div>
+                  ) : (
+                    <></>
+                  )}
                 </div>
               </div>
             </div>

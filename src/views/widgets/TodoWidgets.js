@@ -6,11 +6,12 @@ import Address from 'src/assets/images/address.png'
 import Property from 'src/assets/images/property.png'
 import Employment from 'src/assets/images/employment.png'
 import Guarantor from 'src/assets/images/guarantor.png'
-import { cilCheck, cilPlus, flagSet } from '@coreui/icons'
+import { cilArrowRight, cilCheck, cilPlus, flagSet } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
 import { useState, useEffect } from 'react'
 import { verification } from 'src/config'
 import { useAlert } from 'react-alert'
+import { Link } from 'react-router-dom'
 
 const TodoWidgets = () => {
   const alert = useAlert()
@@ -36,6 +37,23 @@ const TodoWidgets = () => {
   const PAYMENT_STATUS = 'PAYMENT_STATUS'
   const pay = localStorage.getItem(PAYMENT_STATUS)
   const paymentStatus = pay === null ? 'unpaid' : pay
+  const [count, setCount] = useState(0)
+
+  const updateCount = () => {
+    var counter = 0
+    var stored = localStorage.getItem(SELECTED_SERVICES)
+
+    if (stored != null) {
+      var services = JSON.parse(stored)
+      var selectedKeys = Object.keys(services)
+      selectedKeys.forEach((key) => {
+        if (services[key] === true) {
+          counter = counter + 1
+        }
+      })
+      setCount(counter)
+    }
+  }
 
   const thereIsNoActiveService = () => {
     const freshVerificationDump = localStorage.getItem(SELECTED_VERIFICATIONS)
@@ -72,6 +90,7 @@ const TodoWidgets = () => {
 
       setService(mySelectedServices)
       setMyVerifications(mySelectedVerifications)
+      updateCount()
       localStorage.setItem(SELECTED_SERVICES, JSON.stringify(mySelectedServices))
       localStorage.setItem(SELECTED_VERIFICATIONS, JSON.stringify(mySelectedVerifications))
       localStorage.setItem(PAYMENT_STATUS, 'unpaid')
@@ -96,6 +115,7 @@ const TodoWidgets = () => {
 
       setService(mySelectedServices)
       setMyVerifications(mySelectedVerifications)
+      updateCount()
 
       localStorage.setItem(SELECTED_SERVICES, JSON.stringify(mySelectedServices))
       localStorage.setItem(SELECTED_VERIFICATIONS, JSON.stringify(mySelectedVerifications))
@@ -110,152 +130,164 @@ const TodoWidgets = () => {
 
   useEffect(() => {
     var stored = localStorage.getItem(SELECTED_SERVICES)
-    console.log(stored)
     if (stored != null) {
       setStoredService(JSON.parse(stored))
+      updateCount()
     }
   }, [])
 
   return (
-    <CCard className="mb-4 widget native">
-      <CCardBody>
-        <CRow>
-          <CCol className="widget widget-card">
-            <img src={Identity} className="todo-icon" alt="Identity" />
-            <h4>{verification.identity.title}</h4>
-            <h2>₦{verification.identity.price}</h2>
-            {services.identity === true || storedServices['identity'] ? (
-              <button
-                type="button"
-                onClick={() => onSelect('identity')}
-                className="btn btn-primary danger selected "
-              >
-                <CIcon icon={cilCheck} /> &nbsp;
-              </button>
-            ) : (
-              <button
-                type="button"
-                onClick={() => select('identity')}
-                className="btn btn-primary danger "
-              >
-                <CIcon icon={cilPlus} /> &nbsp; Select
-              </button>
-            )}
-            &nbsp;
-          </CCol>
-          <CCol className="widget widget-card">
-            <img src={Address} className="todo-icon" alt="Identity" />
-            <h4>{verification.address.title}</h4>
-            <h2>₦{verification.address.price}</h2>
-            {services.address === true || storedServices['address'] ? (
-              <button
-                type="button"
-                onClick={() => onSelect('address')}
-                className="btn btn-primary danger selected "
-              >
-                <CIcon icon={cilCheck} /> &nbsp;
-              </button>
-            ) : (
-              <button
-                type="button"
-                onClick={() => select('address')}
-                className="btn btn-primary danger "
-              >
-                <CIcon icon={cilPlus} /> &nbsp; Select
-              </button>
-            )}
-          </CCol>
-          <CCol className="widget widget-card">
-            <img src={Business} className="todo-icon" alt="Identity" />
-            <h4>{verification.business.title}</h4>
-            <h2>₦{verification.business.price}</h2>
-            {services.business || storedServices['business'] ? (
-              <button
-                type="button"
-                onClick={() => onSelect('business')}
-                className="btn btn-primary danger selected"
-              >
-                <CIcon icon={cilCheck} /> &nbsp;
-              </button>
-            ) : (
-              <button
-                type="button"
-                onClick={() => select('business')}
-                className="btn btn-primary danger "
-              >
-                <CIcon icon={cilPlus} /> &nbsp; Select
-              </button>
-            )}
-          </CCol>
-          <CCol className="widget widget-card">
-            <img src={Property} className="todo-icon" alt="Identity" />
-            <h4>{verification.property.title}</h4>
-            <h2>₦{verification.property.price}</h2>
-            {services.property || storedServices['property'] ? (
-              <button
-                type="button"
-                onClick={() => onSelect('property')}
-                className="btn btn-primary danger selected "
-              >
-                <CIcon icon={cilCheck} /> &nbsp;
-              </button>
-            ) : (
-              <button
-                type="button"
-                onClick={() => select('property')}
-                className="btn btn-primary danger "
-              >
-                <CIcon icon={cilPlus} /> &nbsp; Select
-              </button>
-            )}
-          </CCol>
-          <CCol className="widget widget-card">
-            <img src={Guarantor} className="todo-icon" alt="Identity" />
-            <h4>{verification.guarantor.title}</h4>
-            <h2>₦{verification.guarantor.price}</h2>
-            {services.guarantor || storedServices['guarantor'] ? (
-              <button
-                type="button"
-                onClick={() => onSelect('guarantor')}
-                className="btn btn-primary danger selected"
-              >
-                <CIcon icon={cilCheck} /> &nbsp;
-              </button>
-            ) : (
-              <button
-                type="button"
-                onClick={() => select('guarantor')}
-                className="btn btn-primary danger"
-              >
-                <CIcon icon={cilPlus} /> &nbsp; Select
-              </button>
-            )}
-          </CCol>
-          <CCol className="widget widget-card">
-            <img src={Employment} className="todo-icon" alt="Identity" />
-            <h4>{verification.employment.title}</h4>
-            <h2>₦{verification.employment.price}</h2>
-            {services.employment || storedServices['employment'] ? (
-              <button
-                type="button"
-                onClick={() => onSelect('employment')}
-                className="btn btn-primary danger selected"
-              >
-                <CIcon icon={cilCheck} /> &nbsp;
-              </button>
-            ) : (
-              <button
-                type="button"
-                onClick={() => select('employment')}
-                className="btn btn-primary danger "
-              >
-                <CIcon icon={cilPlus} /> &nbsp; Select
-              </button>
-            )}
-          </CCol>
-        </CRow>
-      </CCardBody>
-    </CCard>
+    <>
+      {' '}
+      <div className="subscription-trigger-wrapper">
+        <Link
+          to="/checkout"
+          type="button"
+          className="btn btn-outline subscription-right-link text-right text-end"
+        >
+          <CIcon icon={cilArrowRight} /> ({count}) Selected Services
+        </Link>
+      </div>
+      <CCard className="mb-4 widget native">
+        <CCardBody>
+          <CRow>
+            <CCol className="widget widget-card">
+              <img src={Identity} className="todo-icon" alt="Identity" />
+              <h4>{verification.identity.title}</h4>
+              <h2>₦{verification.identity.price}</h2>
+              {services.identity === true || storedServices['identity'] ? (
+                <button
+                  type="button"
+                  onClick={() => onSelect('identity')}
+                  className="btn btn-primary danger selected "
+                >
+                  <CIcon icon={cilCheck} /> &nbsp;
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => select('identity')}
+                  className="btn btn-primary danger "
+                >
+                  <CIcon icon={cilPlus} /> &nbsp; Select
+                </button>
+              )}
+              &nbsp;
+            </CCol>
+            <CCol className="widget widget-card">
+              <img src={Address} className="todo-icon" alt="Identity" />
+              <h4>{verification.address.title}</h4>
+              <h2>₦{verification.address.price}</h2>
+              {services.address === true || storedServices['address'] ? (
+                <button
+                  type="button"
+                  onClick={() => onSelect('address')}
+                  className="btn btn-primary danger selected "
+                >
+                  <CIcon icon={cilCheck} /> &nbsp;
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => select('address')}
+                  className="btn btn-primary danger "
+                >
+                  <CIcon icon={cilPlus} /> &nbsp; Select
+                </button>
+              )}
+            </CCol>
+            <CCol className="widget widget-card">
+              <img src={Business} className="todo-icon" alt="Identity" />
+              <h4>{verification.business.title}</h4>
+              <h2>₦{verification.business.price}</h2>
+              {services.business || storedServices['business'] ? (
+                <button
+                  type="button"
+                  onClick={() => onSelect('business')}
+                  className="btn btn-primary danger selected"
+                >
+                  <CIcon icon={cilCheck} /> &nbsp;
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => select('business')}
+                  className="btn btn-primary danger "
+                >
+                  <CIcon icon={cilPlus} /> &nbsp; Select
+                </button>
+              )}
+            </CCol>
+            <CCol className="widget widget-card">
+              <img src={Property} className="todo-icon" alt="Identity" />
+              <h4>{verification.property.title}</h4>
+              <h2>₦{verification.property.price}</h2>
+              {services.property || storedServices['property'] ? (
+                <button
+                  type="button"
+                  onClick={() => onSelect('property')}
+                  className="btn btn-primary danger selected "
+                >
+                  <CIcon icon={cilCheck} /> &nbsp;
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => select('property')}
+                  className="btn btn-primary danger "
+                >
+                  <CIcon icon={cilPlus} /> &nbsp; Select
+                </button>
+              )}
+            </CCol>
+            <CCol className="widget widget-card">
+              <img src={Guarantor} className="todo-icon" alt="Identity" />
+              <h4>{verification.guarantor.title}</h4>
+              <h2>₦{verification.guarantor.price}</h2>
+              {services.guarantor || storedServices['guarantor'] ? (
+                <button
+                  type="button"
+                  onClick={() => onSelect('guarantor')}
+                  className="btn btn-primary danger selected"
+                >
+                  <CIcon icon={cilCheck} /> &nbsp;
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => select('guarantor')}
+                  className="btn btn-primary danger"
+                >
+                  <CIcon icon={cilPlus} /> &nbsp; Select
+                </button>
+              )}
+            </CCol>
+            <CCol className="widget widget-card">
+              <img src={Employment} className="todo-icon" alt="Identity" />
+              <h4>{verification.employment.title}</h4>
+              <h2>₦{verification.employment.price}</h2>
+              {services.employment || storedServices['employment'] ? (
+                <button
+                  type="button"
+                  onClick={() => onSelect('employment')}
+                  className="btn btn-primary danger selected"
+                >
+                  <CIcon icon={cilCheck} /> &nbsp;
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => select('employment')}
+                  className="btn btn-primary danger "
+                >
+                  <CIcon icon={cilPlus} /> &nbsp; Select
+                </button>
+              )}
+            </CCol>
+          </CRow>
+        </CCardBody>
+      </CCard>
+    </>
   )
 }
 

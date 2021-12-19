@@ -12,7 +12,14 @@ import {
   CNavItem,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { cilArrowCircleRight, cilArrowRight, cilBell, cilMenu, cilMoney } from '@coreui/icons'
+import {
+  cilAppsSettings,
+  cilArrowCircleRight,
+  cilArrowRight,
+  cilBell,
+  cilMenu,
+  cilMoney,
+} from '@coreui/icons'
 
 import { AppBreadcrumb } from './index'
 import { AppHeaderDropdown } from './header/index'
@@ -86,13 +93,18 @@ const AppHeader = () => {
                             <CIcon icon={cilMoney} />
                             &nbsp; Fund Wallet
                           </Link>
+                          <button
+                            onClick={() => {
+                              window.location.href = 'https://iprove.ng/api'
+                            }}
+                            className="btn btn-outline outline danger"
+                          >
+                            <CIcon icon={cilAppsSettings} /> &nbsp; API Documentation
+                          </button>
                         </>
                       ) : (
                         <></>
                       )}
-                      <Link to="/checkout" type="button" className="btn btn-outline outline danger">
-                        <CIcon icon={cilArrowRight} /> &nbsp; Subscriptions
-                      </Link>
                     </h5>
                   </CNavLink>
                 </CNavItem>
