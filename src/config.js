@@ -1,5 +1,5 @@
 module.exports = global.config = {
-  baseURL: 'http://testapi.iprove.ng',
+  baseURL: 'https://testapi.iprove.ng',
   publicKey: 'FLWPUBK-2270da1d89b4bb467c42b015a07f7e2f-X',
   verification: {
     identity: {

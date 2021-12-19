@@ -95,7 +95,7 @@ const AppHeader = () => {
                           </Link>
                           <button
                             onClick={() => {
-                              window.location.href = 'https://iprove.ng/api'
+                              window.open('https://iprove.ng/api', '_blank')
                             }}
                             className="btn btn-outline outline danger"
                           >
