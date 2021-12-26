@@ -6,7 +6,19 @@ export const generateUUID = () => {
   return 'iProve'.concat([gen4(), gen4(), gen4(), gen4(), gen4(), gen4(), gen4(), gen4()].join(''))
 }
 
-export const getParams = function (param) {
+export const getParams = function () {
+  var params = window.location.search
+  if (params != null && params !== '') {
+    return JSON.parse(
+      '{"' + params.replace(/&/g, '","').replace(/=/g, '":"') + '"}',
+      function (key, value) {
+        return key === '' ? value : decodeURIComponent(value)
+      },
+    )
+  }
+  return null
+}
+export const getParam = function (param) {
   const url = window.location.href
   var params = url.substring(url.lastIndexOf('?') + 1)
   var absParams = {}

@@ -16,7 +16,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 const logout = () => {
   localStorage.removeItem('SESSION')
-  window.location.href = '#/login'
+  window.location.href = 'https://www.iprove.ng/auth/login'
 }
 
 const AppHeaderDropdown = () => {

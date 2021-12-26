@@ -14,9 +14,10 @@ import CIcon from '@coreui/icons-react'
 import avatar from './../../assets/images/avatars/avatar.jpg'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { appURL } from 'src/config'
 const logout = () => {
   localStorage.removeItem('SESSION')
-  window.location.href = 'https://iprove.ng/auth/login'
+  window.location.href = appURL + '/auth/login'
 }
 
 const AppHeaderDropdown = () => {

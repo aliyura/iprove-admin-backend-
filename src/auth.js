@@ -1,7 +1,7 @@
 export const getUserDetails = () => {
-  var user = localStorage.getItem('SESSION')
-  if (user != null) {
-    return JSON.parse(user)
+  var data = localStorage.getItem('SESSION')
+  if (data != null) {
+    return JSON.parse(data)
   }
 }
 

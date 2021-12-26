@@ -29,6 +29,7 @@ import { useAlert } from 'react-alert'
 import { useEffect, useState } from 'react'
 import AdministrationService from 'src/services/administration-service'
 import Loader from './utils/loader/Loader'
+import { appURL } from 'src/config'
 
 const AppHeader = () => {
   const dispatch = useDispatch()
@@ -95,7 +96,7 @@ const AppHeader = () => {
                           </Link>
                           <button
                             onClick={() => {
-                              window.open('https://iprove.ng/api', '_blank')
+                              window.open(appURL + '/api', '_blank')
                             }}
                             className="btn btn-outline outline danger"
                           >
