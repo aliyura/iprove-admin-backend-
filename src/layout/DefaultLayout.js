@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { AppContent, AppSidebar, AppFooter, AppHeader } from '../components/index'
 import { getParams } from 'src/utils'
 import Loader from 'src/components/utils/loader/Loader'
+import { appURL } from 'src/config'
 
 const DefaultLayout = () => {
   const [session, setSession] = useState(null)
@@ -47,7 +48,7 @@ const DefaultLayout = () => {
         </div>
       )
     } else {
-      window.location.href = 'https://iprove.ng/auth/login'
+      window.location.href = appURL + '/auth/login'
     }
   }
 }

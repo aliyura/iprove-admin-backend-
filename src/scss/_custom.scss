@@ -91,6 +91,16 @@ td {
   background: #fcd535;
   color: #333;
 }
+.native:hover,
+.native:focus,
+.native:click {
+  background: #fcd535;
+  background-color: #fcd535;
+  background-image: linear-gradient(180deg, #ffd428, #fcd535);
+  border-color: #fcd535;
+  background: #fcd535;
+  color: #333;
+}
 .outline {
   background: #fff;
   color: #222222;
@@ -138,7 +148,7 @@ td {
 
 .widget-card .todo-icon {
   width: 60px;
-  height: 60px;
+  height: 45px;
   margin-top: 5px;
   margin-bottom: 10px;
 }
@@ -151,6 +161,51 @@ td {
   color: 222;
   padding-right: 20px;
   text-shadow: 1px 1px 0px #222;
+}
+.nin-details-card {
+  padding: 20px;
+}
+.nin-profile {
+  width: 100%;
+}
+.nin-details-card p {
+  color: #78797a;
+}
+.nin-details-card .row .col-sm-3 {
+  padding: 5px;
+  margin-left: 1em;
+  border-bottom: 1px solid #78797a;
+  text-align: left;
+}
+.listing-card {
+  background: none;
+  border: none;
+}
+.listing-card .widget {
+  margin: 10px;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-color: var(--cui-card-bg, #fff);
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 21, 0.125);
+  border: 1px solid var(--cui-card-border-color, rgba(0, 0, 21, 0.125));
+  border-radius: 0.25rem;
+}
+.checkout-button {
+  height: 40px;
+  float: right;
+  margin-right: 1em;
+}
+.btn:hover,
+.btn:focus,
+.checkout-button:hover,
+.checkout-button:focus {
+  background-color: #222222 !important;
+  border-color: #222222 !important;
+  color: #fff !important;
+}
+.text-right {
+  text-align: right;
 }
 input,
 select {
@@ -210,5 +265,6 @@ fieldset:disabled .btn {
   color: #e55353;
   border-radius: 0;
   padding: 10px;
+  margin-top: -2em;
   border-bottom: 1px solid #ebedef;
 }

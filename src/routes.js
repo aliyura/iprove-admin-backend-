@@ -22,6 +22,10 @@ const InActiveOrganizations = React.lazy(() => import('./views/organization/InAc
 const OrganizationProfile = React.lazy(() =>
   import('./views/base/organization-details/OrganizationProfile'),
 )
+const CheckIdentity = React.lazy(() => import('./views/idcheck/CheckIdentity'))
+const NINDetails = React.lazy(() => import('./views/idcheck/NINDetails'))
+const VerificationListing = React.lazy(() => import('./views/base/VerificationListing'))
+
 const Checkout = React.lazy(() => import('./views/base/Checkout'))
 const CreateOrganization = React.lazy(() =>
   import('./views/base/create-organization/CreateOrganization'),
@@ -72,6 +76,9 @@ const routes = [
   { path: '/organizations/active', name: 'ActiveOrganizations', component: ActiveOrganizations },
 
   //verifications
+  { path: '/verification/list', name: 'VerificationListing', component: VerificationListing },
+  { path: '/nin/check', name: 'CheckIdentity', component: CheckIdentity },
+  { path: '/nin/details', name: 'NinDetails', component: NINDetails },
   { path: '/nin/verification', name: 'NINVerification', component: NINVerification },
   { path: '/business/verification', name: 'BusinessVerification', component: BusinessVerification },
   {
@@ -99,6 +106,7 @@ const routes = [
     name: 'InActiveOrganizations',
     component: InActiveOrganizations,
   },
+
   { path: '/profile', name: 'Profile', component: OrganizationProfile },
   { path: '/checkout', name: 'Checkout', component: Checkout },
   {

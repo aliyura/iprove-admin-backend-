@@ -37,16 +37,17 @@ const NINVerification = () => {
               type: 'error',
             })
           } else {
-            if (response.success) {
+            if (response.success && response.payload != null) {
               //close this verification
               selectedVerifications['identity'].status = 'closed'
+              selectedVerifications['identity'].selected = false
               localStorage.setItem(SELECTED_VERIFICATIONS, JSON.stringify(selectedVerifications))
 
               alert.show(response.message, {
                 timeout: 20000,
                 type: 'success',
               })
-              if (response.success) {
+              if (response.success && response.payload != null) {
                 window.location.href = '#/guarantor/verifications'
               }
             } else {

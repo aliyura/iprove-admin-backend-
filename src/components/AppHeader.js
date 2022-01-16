@@ -50,7 +50,7 @@ const AppHeader = () => {
       if (response == null) {
         setWalletBalance(0)
       } else {
-        if (response.success) {
+        if (response.success && response.payload != null) {
           setWalletBalance(response.payload.balance)
         } else {
           setWalletBalance(0)
@@ -84,7 +84,7 @@ const AppHeader = () => {
                 <CNavItem>
                   <CNavLink to="/dashboard" component={NavLink} activeClassName="active">
                     <h5>
-                      {currentUser.accountype !== 'INDIVIDUAL' ? (
+                      {currentUser.accounttype !== 'INDIVIDUAL' ? (
                         <>
                           Wallet Balance :{' '}
                           <span className="balance-badge">

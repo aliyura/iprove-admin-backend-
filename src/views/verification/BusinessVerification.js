@@ -37,16 +37,17 @@ const BusinessVerification = () => {
               type: 'error',
             })
           } else {
-            if (response.success) {
+            if (response.success && response.payload != null) {
               //close this verification
               selectedVerifications['business'].status = 'closed'
+              selectedVerifications['business'].selected = false
               localStorage.setItem(SELECTED_VERIFICATIONS, JSON.stringify(selectedVerifications))
 
               alert.show(response.message, {
                 timeout: 20000,
                 type: 'success',
               })
-              if (response.success) {
+              if (response.success && response.payload != null) {
                 window.location.href = '#/business/verifications'
               }
             } else {

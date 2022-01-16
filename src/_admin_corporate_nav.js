@@ -1,6 +1,15 @@
 import React from 'react'
 import CIcon from '@coreui/icons-react'
-import { cilMoney, cilNotes, cilPencil, cilSpeedometer, cilUser } from '@coreui/icons'
+import {
+  cilAlbum,
+  cilLockLocked,
+  cilLockUnlocked,
+  cilMoney,
+  cilNotes,
+  cilPencil,
+  cilSpeedometer,
+  cilUser,
+} from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
 const _nav = [
@@ -17,46 +26,46 @@ const _nav = [
 
   {
     component: CNavTitle,
+    name: 'Manage Verifications',
+  },
+  {
+    component: CNavItem,
     name: 'Verification',
+    to: '/verification/list',
   },
   {
     component: CNavItem,
     name: 'NIN Verification Logs',
     to: '/nin/verifications',
-    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
     name: 'Address Verification Logs',
     to: '/address/verifications',
-    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
   },
 
   {
     component: CNavItem,
     name: 'Business Verification Logs',
     to: '/business/verifications',
-    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
     name: 'Guarantor Verification Logs',
     to: '/guarantor/verifications',
-    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
     name: 'Property Verification Logs',
     to: '/property/verifications',
-    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
   },
 
   {
     component: CNavItem,
     name: 'Employment Verification Logs',
     to: '/employment/verifications',
-    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
   },
+
   {
     component: CNavTitle,
     name: 'Manage Organization',
@@ -111,11 +120,6 @@ const _nav = [
         component: CNavItem,
         name: 'Change Password',
         to: '/account/change-password',
-      },
-      {
-        component: CNavItem,
-        name: 'Logout',
-        to: '/login',
       },
     ],
   },

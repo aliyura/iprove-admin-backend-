@@ -24,7 +24,7 @@ const OrganizationProfile = () => {
       if (response == null) {
         setWalletBalance(0)
       } else {
-        if (response.success) {
+        if (response.success && response.payload != null) {
           setWalletBalance(response.payload.balance)
         } else {
           setWalletBalance(0)
@@ -45,12 +45,12 @@ const OrganizationProfile = () => {
           type: 'error',
         })
       } else {
-        if (response.success) {
+        if (response.success && response.payload != null) {
           alert.show(response.message, {
             timeout: 20000,
             type: 'success',
           })
-          if (response.success) {
+          if (response.success && response.payload != null) {
             window.location.href = '#/status?state=1&msg=Profile Updated Successfully'
           }
         } else {
@@ -74,7 +74,7 @@ const OrganizationProfile = () => {
           type: 'error',
         })
       } else {
-        if (response.success) {
+        if (response.success && response.payload != null) {
           currentUser.name = request.name
           currentUser.email = request.email
           currentUser.mobile = request.mobile
@@ -87,7 +87,7 @@ const OrganizationProfile = () => {
             timeout: 20000,
             type: 'success',
           })
-          if (response.success) {
+          if (response.success && response.payload != null) {
             window.location.href = '#/status?state=1&msg=Keys Resetted Successful'
           }
         } else {

@@ -2,6 +2,139 @@ import axios from 'axios'
 import { getUserOrganizationId, getUserSecretKey } from 'src/auth'
 import { baseURL } from 'src/config'
 const IdentityService = {
+  getNINById: async function (nin) {
+    //inspect the value
+    const options = {
+      url: baseURL + '/identity/api/v1/nin/details/get_by_id/' + nin,
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'secret-key': getUserSecretKey(),
+        'org-id': getUserOrganizationId(),
+      },
+    }
+    return await axios(options)
+      .then((res) => {
+        console.log(res)
+        return res.data
+      })
+      .catch((err) => {
+        console.log(err)
+        return null
+      })
+  },
+
+  getNINByPhoneNumber: async function (phoneNumber) {
+    //inspect the value
+    const options = {
+      url: baseURL + '/identity/api/v1/nin/details/get_by_phonenumber/' + phoneNumber,
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'secret-key': getUserSecretKey(),
+        'org-id': getUserOrganizationId(),
+      },
+    }
+    return await axios(options)
+      .then((res) => {
+        console.log(res)
+        return res.data
+      })
+      .catch((err) => {
+        console.log(err)
+        return null
+      })
+  },
+
+  getNINByPhoneNumber: async function (phoneNumber) {
+    //inspect the value
+    const options = {
+      url: baseURL + '/identity/api/v1/nin/details/get_by_phonenumber/' + phoneNumber,
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'secret-key': getUserSecretKey(),
+        'org-id': getUserOrganizationId(),
+      },
+    }
+    return await axios(options)
+      .then((res) => {
+        console.log(res)
+        return res.data
+      })
+      .catch((err) => {
+        console.log(err)
+        return null
+      })
+  },
+
+  getNINByDocumentId: async function (documentId) {
+    //inspect the value
+    const options = {
+      url: baseURL + '/identity/api/v1/nin/details/get_by_document/' + documentId,
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'secret-key': getUserSecretKey(),
+        'org-id': getUserOrganizationId(),
+      },
+    }
+    return await axios(options)
+      .then((res) => {
+        console.log(res)
+        return res.data
+      })
+      .catch((err) => {
+        console.log(err)
+        return null
+      })
+  },
+
+  getNINByBioData: async function (request) {
+    //inspect the value
+    const options = {
+      url: baseURL + '/identity/api/v1/nin/details/get_by_biodata',
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'secret-key': getUserSecretKey(),
+        'org-id': getUserOrganizationId(),
+      },
+      data: request,
+    }
+    return await axios(options)
+      .then((res) => {
+        console.log(res)
+        return res.data
+      })
+      .catch((err) => {
+        console.log(err)
+        return null
+      })
+  },
+  getNINByFingerprint: async function (request) {
+    //inspect the value
+    const options = {
+      url: baseURL + '/identity/api/v1/nin/details/get_by_fingerprint',
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'secret-key': getUserSecretKey(),
+        'org-id': getUserOrganizationId(),
+      },
+      data: request,
+    }
+    return await axios(options)
+      .then((res) => {
+        console.log(res)
+        return res.data
+      })
+      .catch((err) => {
+        console.log(err)
+        return null
+      })
+  },
+
   verifyAddress: async function (request) {
     //inspect the value
     const options = {

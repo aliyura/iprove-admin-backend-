@@ -2,5 +2,13 @@
   width: 100%;
   padding-left: 300px;
   will-change: auto;
-  @include transition(padding .15s);
+  @include transition(padding 0.15s);
+}
+@media (max-width: 768px) {
+  .wrapper {
+    width: 100%;
+    padding-left: 42px;
+    will-change: auto;
+    @include transition(padding 0.15s);
+  }
 }

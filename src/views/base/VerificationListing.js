@@ -1,21 +1,21 @@
-import React from 'react'
-import { CCard, CCardBody, CCol, CRow } from '@coreui/react'
-import Check from 'src/assets/images/check.png'
-import Identity from 'src/assets/images/identity.png'
-import Business from 'src/assets/images/business.png'
-import Address from 'src/assets/images/address.png'
-import Property from 'src/assets/images/property.png'
-import Employment from 'src/assets/images/employment.png'
-import Guarantor from 'src/assets/images/guarantor.png'
-import Certificate from 'src/assets/images/certificate.png'
-import { cilArrowRight, cilCheck, cilPlus, flagSet } from '@coreui/icons'
+import { cilCheck, cilPlus } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
-import { useState, useEffect } from 'react'
-import { verification } from 'src/config'
+import { CCard, CCardBody, CCol, CRow } from '@coreui/react'
+import React from 'react'
+import { useEffect, useState } from 'react'
 import { useAlert } from 'react-alert'
 import { Link } from 'react-router-dom'
+import Address from 'src/assets/images/address.png'
+import Business from 'src/assets/images/business.png'
+import Certificate from 'src/assets/images/certificate.png'
+import Check from 'src/assets/images/check.png'
+import Employment from 'src/assets/images/employment.png'
+import Guarantor from 'src/assets/images/guarantor.png'
+import Identity from 'src/assets/images/identity.png'
+import Property from 'src/assets/images/property.png'
+import { verification } from 'src/config'
 
-const TodoWidgets = () => {
+const VerificationListing = () => {
   const alert = useAlert()
   const [services, setService] = useState({
     check: false,
@@ -38,6 +38,24 @@ const TodoWidgets = () => {
   const [myVerifications, setMyVerifications] = useState(null)
   const SELECTED_SERVICES = 'SELECTED_SERVICES'
   const SELECTED_VERIFICATIONS = 'SELECTED_VERIFICATIONS'
+  const [count, setCount] = useState(0)
+
+  const init = () => {
+    setInterval(() => {
+      var counter = 0
+      let storedService = localStorage.getItem(SELECTED_SERVICES)
+      if (storedService != null) {
+        var services = JSON.parse(storedService)
+        var selectedKeys = Object.keys(services)
+        selectedKeys.forEach((key) => {
+          if (services[key] === true) {
+            counter = counter + 1
+          }
+        })
+        setCount(counter)
+      }
+    }, 1000)
+  }
 
   const thereIsNoActiveService = () => {
     const freshVerificationDump = localStorage.getItem(SELECTED_VERIFICATIONS)
@@ -62,11 +80,9 @@ const TodoWidgets = () => {
   }
 
   const select = (key) => {
-    console.log(key)
     if (thereIsNoActiveService()) {
       const selectedVerifications = localStorage.getItem(SELECTED_VERIFICATIONS)
       const selectedServices = localStorage.getItem(SELECTED_SERVICES)
-
       const mySelectedVerifications =
         selectedVerifications != null ? JSON.parse(selectedVerifications) : verification
       const mySelectedServices = selectedServices != null ? JSON.parse(selectedServices) : services
@@ -94,7 +110,6 @@ const TodoWidgets = () => {
   }
 
   const onSelect = (key) => {
-    console.log(key)
     if (thereIsNoActiveService()) {
       const selectedVerifications = localStorage.getItem(SELECTED_VERIFICATIONS)
       const selectedServices = localStorage.getItem(SELECTED_SERVICES)
@@ -118,19 +133,40 @@ const TodoWidgets = () => {
     }
   }
 
+  const continueToCheckout = () => {
+    var keys = []
+    var isSelected = false
+    if (myVerifications != null) {
+      keys = Object.keys(myVerifications)
+    }
+
+    keys.forEach((key) => {
+      if (myVerifications[key]) isSelected = true
+    })
+
+    if (isSelected) {
+      window.location.href = '/#/checkout'
+    } else {
+      alert.show('No Verification Selected', {
+        timeout: 20000,
+        type: 'error',
+      })
+    }
+  }
+
   useEffect(() => {
     var stored = localStorage.getItem(SELECTED_SERVICES)
     if (stored != null) {
       var myVerifications = JSON.parse(stored)
-      console.log(myVerifications)
       setStoredService(myVerifications)
       setMyVerifications(myVerifications)
+      init()
     }
   }, [])
 
   return (
     <>
-      <CCard className="mb-4 widget native">
+      <CCard className="mb-4 listing-card">
         <CCardBody>
           <CRow>
             <CCol className="widget widget-card">
@@ -183,7 +219,7 @@ const TodoWidgets = () => {
               <img src={Address} className="todo-icon" alt="Identity" />
               <h4>{verification.address.title}</h4>
               <h2>₦{verification.address.price}</h2>
-              {services.address === true || storedServices['address'] === true ? (
+              {services.address === true || storedServices['address'] ? (
                 <button
                   type="button"
                   onClick={() => onSelect('address')}
@@ -201,6 +237,7 @@ const TodoWidgets = () => {
                 </button>
               )}
             </CCol>
+
             <CCol className="widget widget-card">
               <img src={Business} className="todo-icon" alt="Identity" />
               <h4>{verification.business.title}</h4>
@@ -223,6 +260,8 @@ const TodoWidgets = () => {
                 </button>
               )}
             </CCol>
+          </CRow>
+          <CRow>
             <CCol className="widget widget-card">
               <img src={Property} className="todo-icon" alt="Identity" />
               <h4>{verification.property.title}</h4>
@@ -267,6 +306,7 @@ const TodoWidgets = () => {
                 </button>
               )}
             </CCol>
+
             <CCol className="widget widget-card">
               <img src={Employment} className="todo-icon" alt="Identity" />
               <h4>{verification.employment.title}</h4>
@@ -289,20 +329,22 @@ const TodoWidgets = () => {
                 </button>
               )}
             </CCol>
+            <CCol className="widget widget-card">
+              <img height="60" src={Certificate} className="todo-icon" alt="Identity" />
+              <h4>{verification.certificate.title}</h4>
+              <h2>Comming Soon....</h2>
+            </CCol>
           </CRow>
         </CCardBody>
-      </CCard>{' '}
-      <div className="subscription-trigger-wrapper">
-        <Link
-          to="/verification/list"
-          type="button"
-          className="btn btn-outline subscription-right-link text-right text-end"
-        >
-          <CIcon icon={cilArrowRight} /> View More...
-        </Link>
+      </CCard>
+
+      <div className="row text-right checkout-button">
+        <button type="button" className="btn btn-iprove native" onClick={continueToCheckout}>
+          Proceed to Checkout
+        </button>
       </div>
     </>
   )
 }
 
-export default TodoWidgets
+export default VerificationListing

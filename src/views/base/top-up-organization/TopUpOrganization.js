@@ -29,12 +29,12 @@ const TopUpOrganization = () => {
           type: 'error',
         })
       } else {
-        if (response.success) {
+        if (response.success && response.payload != null) {
           alert.show(response.message, {
             timeout: 20000,
             type: 'success',
           })
-          if (response.success) {
+          if (response.success && response.payload != null) {
             window.location.href = '#/status?state=1&msg=Wallet Credited Successfully'
           }
         } else {
