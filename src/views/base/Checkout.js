@@ -109,15 +109,14 @@ const Checkout = () => {
 
   const pay = () => {
     if (selectedServices != null) {
-      markOrderAsPaid()
-      // handleFlutterPayment({
-      //   callback: (response) => {
-      //     console.log(response)
-      //     markOrderAsPaid()
-      //     closePaymentModal()
-      //   },
-      //   onClose: () => {},
-      // })
+      handleFlutterPayment({
+        callback: (response) => {
+          console.log(response)
+          markOrderAsPaid()
+          closePaymentModal()
+        },
+        onClose: () => {},
+      })
     } else {
       alert.show('No Service Selected', {
         timeout: 20000,
