@@ -41,6 +41,7 @@ const TodoWidgets = () => {
 
   const thereIsNoActiveService = () => {
     const freshVerificationDump = localStorage.getItem(SELECTED_VERIFICATIONS)
+    const selectedServices = localStorage.getItem(SELECTED_SERVICES)
     const freshSelectedVerifications =
       freshVerificationDump !== null ? JSON.parse(freshVerificationDump) : null
 
@@ -51,9 +52,12 @@ const TodoWidgets = () => {
       var baseStatus = []
       //get active counts
       keys.forEach((key) => {
-        baseStatus.push(freshSelectedVerifications[key].status)
+        if (freshSelectedVerifications[key].selected)
+          baseStatus.push(freshSelectedVerifications[key].status)
       })
 
+      console.log(baseStatus)
+      console.log(selectedServices)
       if (baseStatus.includes('open')) {
         return false
       }
@@ -62,7 +66,6 @@ const TodoWidgets = () => {
   }
 
   const select = (key) => {
-    console.log(key)
     if (thereIsNoActiveService()) {
       const selectedVerifications = localStorage.getItem(SELECTED_VERIFICATIONS)
       const selectedServices = localStorage.getItem(SELECTED_SERVICES)
@@ -119,6 +122,8 @@ const TodoWidgets = () => {
   }
 
   useEffect(() => {
+    // localStorage.removeItem(SELECTED_SERVICES)
+    // localStorage.removeItem(SELECTED_VERIFICATIONS)
     var stored = localStorage.getItem(SELECTED_SERVICES)
     if (stored != null) {
       var myVerifications = JSON.parse(stored)

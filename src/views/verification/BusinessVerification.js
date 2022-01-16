@@ -9,12 +9,15 @@ import IdentityService from 'src/services/identity-service'
 import { useAlert } from 'react-alert'
 
 const BusinessVerification = () => {
+  const SELECTED_SERVICES = 'SELECTED_SERVICES'
   const SELECTED_VERIFICATIONS = 'SELECTED_VERIFICATIONS'
+  //get stored services
+  const storedServices = localStorage.getItem(SELECTED_SERVICES)
   const storedVerifications = localStorage.getItem(SELECTED_VERIFICATIONS)
   //prepare selected services
+  const selectedServices = storedVerifications !== null ? JSON.parse(storedServices) : null
   const selectedVerifications =
     storedVerifications !== null ? JSON.parse(storedVerifications) : null
-
   const [currentUser, setCurrentUser] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const { register, handleSubmit } = useForm()
@@ -41,6 +44,8 @@ const BusinessVerification = () => {
               //close this verification
               selectedVerifications['business'].status = 'closed'
               selectedVerifications['business'].selected = false
+              selectedServices['business'] = false
+              localStorage.setItem(SELECTED_SERVICES, JSON.stringify(selectedServices))
               localStorage.setItem(SELECTED_VERIFICATIONS, JSON.stringify(selectedVerifications))
 
               alert.show(response.message, {

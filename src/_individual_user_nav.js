@@ -20,80 +20,41 @@ const _nav = [
     name: 'Manage Verifications',
   },
   {
-    component: CNavGroup,
+    component: CNavItem,
     name: 'Verification',
-    icon: <CIcon icon={cilLockUnlocked} customClassName="nav-icon" />,
-    items: [
-      {
-        component: CNavItem,
-        name: 'Check Identity',
-        to: '/nin/check',
-      },
-      {
-        component: CNavItem,
-        name: 'NIN Verification',
-        to: '/nin/verification',
-      },
-      {
-        component: CNavItem,
-        name: 'Address Verification',
-        to: '/address/verification',
-      },
-      {
-        component: CNavItem,
-        name: 'Guarantor Verification',
-        to: '/guarantor/verification',
-      },
-      {
-        component: CNavItem,
-        name: 'Employment Verification',
-        to: '/employment/verification',
-      },
-      {
-        component: CNavItem,
-        name: 'Property Verification',
-        to: '/property/verification',
-      },
-    ],
+    to: '/verification/list',
   },
   {
-    component: CNavGroup,
-    name: 'Verification Logs',
-    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
-    items: [
-      {
-        component: CNavItem,
-        name: 'NIN Verification Logs',
-        to: '/nin/verifications',
-      },
-      {
-        component: CNavItem,
-        name: 'Address Verification Logs',
-        to: '/address/verifications',
-      },
+    component: CNavItem,
+    name: 'NIN Verification Logs',
+    to: '/nin/verifications',
+  },
+  {
+    component: CNavItem,
+    name: 'Address Verification Logs',
+    to: '/address/verifications',
+  },
 
-      {
-        component: CNavItem,
-        name: 'Business Verification Logs',
-        to: '/business/verifications',
-      },
-      {
-        component: CNavItem,
-        name: 'Guarantor Verification Logs',
-        to: '/guarantor/verifications',
-      },
-      {
-        component: CNavItem,
-        name: 'Property Verification Logs',
-        to: '/property/verifications',
-      },
+  {
+    component: CNavItem,
+    name: 'Business Verification Logs',
+    to: '/business/verifications',
+  },
+  {
+    component: CNavItem,
+    name: 'Guarantor Verification Logs',
+    to: '/guarantor/verifications',
+  },
+  {
+    component: CNavItem,
+    name: 'Property Verification Logs',
+    to: '/property/verifications',
+  },
 
-      {
-        component: CNavItem,
-        name: 'Employment Verification Logs',
-        to: '/employment/verifications',
-      },
-    ],
+  {
+    component: CNavItem,
+    name: 'Employment Verification Logs',
+    to: '/employment/verifications',
   },
   {
     component: CNavTitle,

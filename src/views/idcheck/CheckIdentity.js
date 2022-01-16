@@ -5,14 +5,17 @@ import CIcon from '@coreui/icons-react'
 import { useEffect, useState } from 'react'
 import { getUserDetails } from 'src/auth'
 import Loader from 'src/components/utils/loader/Loader'
-import AdministrationService from 'src/services/administration-service'
 import { useForm } from 'react-hook-form'
 import { useAlert } from 'react-alert'
 import IdentityService from 'src/services/identity-service'
 const CheckIdentity = () => {
+  const SELECTED_SERVICES = 'SELECTED_SERVICES'
   const SELECTED_VERIFICATIONS = 'SELECTED_VERIFICATIONS'
+  //get stored services
+  const storedServices = localStorage.getItem(SELECTED_SERVICES)
   const storedVerifications = localStorage.getItem(SELECTED_VERIFICATIONS)
   //prepare selected services
+  const selectedServices = storedVerifications !== null ? JSON.parse(storedServices) : null
   const selectedVerifications =
     storedVerifications !== null ? JSON.parse(storedVerifications) : null
 
@@ -48,6 +51,8 @@ const CheckIdentity = () => {
                 //close this verification
                 selectedVerifications['check'].status = 'closed'
                 selectedVerifications['check'].selected = false
+                selectedServices['check'] = false
+                localStorage.setItem(SELECTED_SERVICES, JSON.stringify(selectedServices))
                 localStorage.setItem(SELECTED_VERIFICATIONS, JSON.stringify(selectedVerifications))
 
                 window.location.href = '#/nin/details'
@@ -103,6 +108,8 @@ const CheckIdentity = () => {
                 //close this verification
                 selectedVerifications['check'].status = 'closed'
                 selectedVerifications['check'].selected = false
+                selectedServices['check'] = false
+                localStorage.setItem(SELECTED_SERVICES, JSON.stringify(selectedServices))
                 localStorage.setItem(SELECTED_VERIFICATIONS, JSON.stringify(selectedVerifications))
 
                 window.location.href = '#/nin/details'
@@ -157,6 +164,8 @@ const CheckIdentity = () => {
                 //close this verification
                 selectedVerifications['check'].status = 'closed'
                 selectedVerifications['check'].selected = false
+                selectedServices['check'] = false
+                localStorage.setItem(SELECTED_SERVICES, JSON.stringify(selectedServices))
                 localStorage.setItem(SELECTED_VERIFICATIONS, JSON.stringify(selectedVerifications))
 
                 window.location.href = '#/nin/details'
@@ -217,6 +226,8 @@ const CheckIdentity = () => {
                 //close this verification
                 selectedVerifications['check'].status = 'closed'
                 selectedVerifications['check'].selected = false
+                selectedServices['check'] = false
+                localStorage.setItem(SELECTED_SERVICES, JSON.stringify(selectedServices))
                 localStorage.setItem(SELECTED_VERIFICATIONS, JSON.stringify(selectedVerifications))
 
                 window.location.href = '#/nin/details'
@@ -281,6 +292,8 @@ const CheckIdentity = () => {
                   //close this verification
                   selectedVerifications['check'].status = 'closed'
                   selectedVerifications['check'].selected = false
+                  selectedServices['check'] = false
+                  localStorage.setItem(SELECTED_SERVICES, JSON.stringify(selectedServices))
                   localStorage.setItem(
                     SELECTED_VERIFICATIONS,
                     JSON.stringify(selectedVerifications),

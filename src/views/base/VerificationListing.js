@@ -72,6 +72,8 @@ const VerificationListing = () => {
         baseStatus.push(freshSelectedVerifications[key].status)
       })
 
+      console.log(baseStatus)
+
       if (baseStatus.includes('open')) {
         return false
       }
